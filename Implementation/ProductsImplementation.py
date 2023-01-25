@@ -12,7 +12,7 @@ class ProductsImplementation(Products):
 
     def add_product(self, product_name, product_type, available_quantity, unit_price):
         # check if the vendor is logged in, then add the product and return True else Return False
-        if(self.vendor_session.check_login(username)):
+        if(self.vendor_session.check_login(self._username)):
             self.product_model.add_product(product_name, product_type, available_quantity, unit_price) 
         else:
             return False
@@ -20,7 +20,7 @@ class ProductsImplementation(Products):
     def search_product_by_name(self, product_name):
         # Search if the product is available in the dictionary if the vendor is authorized to access else return False
         # If product is available then return product
-        if(self.vendor_session.check_login(username)):
+        if(self.vendor_session.check_login(self._username)):
             if(self.product_model.search_product(product_name)):
                 return self.product_model.product_db[product_name]
         else:
@@ -29,6 +29,6 @@ class ProductsImplementation(Products):
     def get_all_products(self):
         # Check if the vendor can retrieve all the product if not return False
         # otherwise return all the products 
-        if(self.vendor_session.check_login(username)):
+        if(self.vendor_session.check_login(self._username)):
             self.product_model.all_products()
 
